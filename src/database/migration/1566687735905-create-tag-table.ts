@@ -10,6 +10,8 @@ export class CreateTagTable1566687735905 implements MigrationInterface {
             name: 'id',
             type: 'int',
             isPrimary: true,
+            isGenerated: true,
+            generationStrategy: 'increment',
           },
           {
             name: 'name',

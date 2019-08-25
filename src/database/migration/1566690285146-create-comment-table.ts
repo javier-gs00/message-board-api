@@ -15,6 +15,8 @@ export class CreateCommentTable1566690285146 implements MigrationInterface {
             name: 'id',
             type: 'int',
             isPrimary: true,
+            isGenerated: true,
+            generationStrategy: 'increment',
           },
           {
             name: 'title',

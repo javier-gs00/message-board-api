@@ -10,6 +10,8 @@ export class CreateRoleTable1566668143955 implements MigrationInterface {
             name: 'id',
             type: 'int',
             isPrimary: true,
+            isGenerated: true,
+            generationStrategy: 'increment',
           },
           {
             name: 'name',
