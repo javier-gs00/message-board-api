@@ -3,7 +3,7 @@ import { RoleService } from './role.service';
 import { Role } from '../entity/role.entity';
 
 @Controller('roles')
-export class RolesController {
+export class RoleController {
   constructor(private readonly rolesService: RoleService) {}
 
   @Get()
