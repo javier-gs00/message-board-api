@@ -10,7 +10,5 @@ export class UserService {
     private readonly userRepository: Repository<User>,
   ) {}
 
-  //   async save(): Promise<void> {
-
-  //   }
+  async create(): Promise<void> {}
 }
