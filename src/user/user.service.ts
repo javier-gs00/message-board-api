@@ -10,5 +10,30 @@ export class UserService {
     private readonly userRepository: Repository<User>,
   ) {}
 
-  async create(): Promise<void> {}
+  async create(
+    firstName: string,
+    lastName: string,
+    roleId: number,
+  ): Promise<User> {
+    const user = this.userRepository.create({
+      firstName,
+      lastName,
+      roleId,
+    });
+    return this.userRepository.save(user);
+  }
+
+  async findById(id: number): Promise<User> {
+    return this.userRepository.findOne({ where: { id } });
+  }
+
+  async findUserPosts(userId: number): Promise<any> {
+    const usersWithPosts = await this.userRepository
+      .createQueryBuilder('user')
+      .leftJoinAndSelect('user.posts', 'post')
+      .where('user.id = :id', { id: userId })
+      .getOne();
+
+    return usersWithPosts;
+  }
 }

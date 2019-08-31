@@ -4,6 +4,7 @@ import { RolesModule } from './role/role.module';
 import { UserModule } from './user/user.module';
 import { ConfigModule } from './config/config.module';
 import { ConfigService } from './config/config.service';
+import { PostModule } from './post/post.module';
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { ConfigService } from './config/config.service';
     }),
     RolesModule,
     UserModule,
+    PostModule,
   ],
 })
 export class AppModule implements OnModuleInit {

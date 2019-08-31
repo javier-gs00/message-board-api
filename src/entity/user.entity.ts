@@ -28,4 +28,7 @@ export class User {
 
   @ManyToOne(type => Role, role => role.users)
   role: Role;
+
+  @Column('int')
+  roleId: number;
 }

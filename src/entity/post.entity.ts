@@ -17,6 +17,9 @@ export class Post {
   @Column('varchar')
   title: string;
 
+  @Column('int')
+  userId: number;
+
   @ManyToOne(type => User, user => user.posts)
   user: User;
 
