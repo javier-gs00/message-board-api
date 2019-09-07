@@ -10,7 +10,7 @@ export class RoleService {
     private readonly roleRepository: Repository<Role>,
   ) {}
 
-  async findAll(): Promise<Role[]> {
-    return await this.roleRepository.find();
+  findAll(): Promise<Role[]> {
+    return this.roleRepository.find();
   }
 }

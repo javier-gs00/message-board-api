@@ -7,12 +7,7 @@ export class RoleController {
   constructor(private readonly rolesService: RoleService) {}
 
   @Get()
-  async findAll(): Promise<Role[]> {
-    try {
-      return this.rolesService.findAll();
-    } catch (error) {
-      console.log(error);
-      throw new HttpException('internal server error', 500);
-    }
+  findAll(): Promise<Role[]> {
+    return this.rolesService.findAll();
   }
 }

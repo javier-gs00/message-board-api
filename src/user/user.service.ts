@@ -10,11 +10,7 @@ export class UserService {
     private readonly userRepository: Repository<User>,
   ) {}
 
-  async create(
-    firstName: string,
-    lastName: string,
-    roleId: number,
-  ): Promise<User> {
+  create(firstName: string, lastName: string, roleId: number): Promise<User> {
     const user = this.userRepository.create({
       firstName,
       lastName,
@@ -23,17 +19,21 @@ export class UserService {
     return this.userRepository.save(user);
   }
 
-  async findById(id: number): Promise<User> {
-    return this.userRepository.findOne({ where: { id } });
+  findById(id: number): Promise<User> {
+    // return this.userRepository.findOne({ where: { id } });
+    return this.userRepository
+      .createQueryBuilder('user')
+      .leftJoinAndSelect('user.role', 'role')
+      .addSelect('role.name')
+      .select(['user.firstName', 'user.lastName', 'role.name'])
+      .getOne();
   }
 
-  async findUserPosts(userId: number): Promise<any> {
-    const usersWithPosts = await this.userRepository
+  findUserPosts(userId: number): Promise<any> {
+    return this.userRepository
       .createQueryBuilder('user')
       .leftJoinAndSelect('user.posts', 'post')
       .where('user.id = :id', { id: userId })
       .getOne();
-
-    return usersWithPosts;
   }
 }
