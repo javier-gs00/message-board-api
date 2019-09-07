@@ -1,8 +1,10 @@
 import { Controller, Get, HttpException } from '@nestjs/common';
 import { RoleService } from './role.service';
 import { Role } from '../entity/role.entity';
+import { ApiUseTags } from '@nestjs/swagger';
 
-@Controller('roles')
+@ApiUseTags('Role')
+@Controller('role')
 export class RoleController {
   constructor(private readonly rolesService: RoleService) {}
 

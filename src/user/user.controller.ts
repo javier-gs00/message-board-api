@@ -1,9 +1,10 @@
 import { Controller, Body, Post, Get, Param } from '@nestjs/common';
 import { UserService } from './user.service';
 import { CreateUserBody } from './dto/create-user.dto';
-import { FindUserByIdParams } from './dto/find-user-by-id-params.dto';
-import { FindPostsByUserIdParams } from './dto/find-posts-by-user-id-params.dto';
+import { UserIdParams } from './dto/user-id-params.dto';
+import { ApiUseTags } from '@nestjs/swagger';
 
+@ApiUseTags('User')
 @Controller('user')
 export class UserController {
   constructor(private readonly userService: UserService) {}
@@ -15,18 +16,16 @@ export class UserController {
   }
 
   @Get(':id')
-  findUserById(
-    @Param() findUserByIdParamsDto: FindUserByIdParams,
-  ): Promise<any> {
-    const { id } = findUserByIdParamsDto;
+  findUserById(@Param() findUserByIdParams: UserIdParams): Promise<any> {
+    const { id } = findUserByIdParams;
     return this.userService.findById(id);
   }
 
-  @Get(':id/posts')
+  @Get(':id/post')
   findPostsByUserId(
-    @Param() findPostsByUserIdParamsDto: FindPostsByUserIdParams,
+    @Param() findPostsByUserIdParams: UserIdParams,
   ): Promise<any> {
-    const { id } = findPostsByUserIdParamsDto;
+    const { id } = findPostsByUserIdParams;
     return this.userService.findUserPosts(id);
   }
 }

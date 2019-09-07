@@ -19,9 +19,9 @@ import { PostModule } from './post/post.module';
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
       synchronize: false,
     }),
+    PostModule,
     RolesModule,
     UserModule,
-    PostModule,
   ],
 })
 export class AppModule implements OnModuleInit {
