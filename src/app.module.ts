@@ -1,10 +1,8 @@
 import { Module, OnModuleInit } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { RolesModule } from './role/role.module';
-import { UserModule } from './user/user.module';
 import { ConfigModule } from './config/config.module';
 import { ConfigService } from './config/config.service';
-import { PostModule } from './post/post.module';
+import { ControllerModule } from './controller/controller.module';
 
 @Module({
   imports: [
@@ -19,9 +17,7 @@ import { PostModule } from './post/post.module';
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
       synchronize: false,
     }),
-    PostModule,
-    RolesModule,
-    UserModule,
+    ControllerModule,
   ],
 })
 export class AppModule implements OnModuleInit {
