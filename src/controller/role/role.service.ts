@@ -1,16 +1,12 @@
 import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
 import { Role } from '../../entity/role.entity';
+import { RoleRepository } from '../../repository/role.repository';
 
 @Injectable()
 export class RoleService {
-  constructor(
-    @InjectRepository(Role)
-    private readonly roleRepository: Repository<Role>,
-  ) {}
+  constructor(private readonly roleRepository: RoleRepository) {}
 
   findAll(): Promise<Role[]> {
-    return this.roleRepository.find();
+    return this.roleRepository.findAll();
   }
 }

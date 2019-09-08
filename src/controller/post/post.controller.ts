@@ -14,7 +14,6 @@ export class PostController {
       createPostBodyDto.title,
       createPostBodyDto.userId,
     );
-
     return savedPost;
   }
 }

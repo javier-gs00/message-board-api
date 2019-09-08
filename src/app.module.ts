@@ -3,6 +3,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from './config/config.module';
 import { ConfigService } from './config/config.service';
 import { ControllerModule } from './controller/controller.module';
+import { RepositoryModule } from './repository/repository.module';
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import { ControllerModule } from './controller/controller.module';
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
       synchronize: false,
     }),
+    // RepositoryModule,
     ControllerModule,
   ],
 })

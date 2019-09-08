@@ -1,13 +1,10 @@
 import { Module } from '@nestjs/common';
-import { TypeOrmModule } from '@nestjs/typeorm';
 import { RoleController } from './role.controller';
 import { RoleService } from './role.service';
-import { Role } from '../../entity/role.entity';
+import { RoleRepository } from '../../repository/role.repository';
 
 @Module({
-  // register repositories to use in the current scope
-  imports: [TypeOrmModule.forFeature([Role])],
-  providers: [RoleService],
   controllers: [RoleController],
+  providers: [RoleService, RoleRepository],
 })
 export class RolesModule {}
