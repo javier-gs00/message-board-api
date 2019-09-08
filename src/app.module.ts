@@ -39,8 +39,8 @@ import { AuthModule } from './auth/auth.module';
       inject: [ConfigService],
     }),
     RepositoryModule,
-    ControllerModule,
     AuthModule,
+    ControllerModule,
   ],
 })
 export class AppModule implements OnModuleInit {

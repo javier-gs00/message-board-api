@@ -15,7 +15,7 @@ export class AuthService {
     });
   }
 
-  verifyToken(token: string): Promise<any> {
+  verifyToken(token: string): Promise<string | object> {
     return new Promise((resolve, reject) => {
       jwt.verify(token, 'secret', (err, data) => {
         if (err) {
