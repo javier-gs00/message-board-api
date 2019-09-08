@@ -10,16 +10,31 @@ import { RepositoryModule } from './repository/repository.module';
     ConfigModule,
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
-      useFactory: async (config: ConfigService) => ({
-        type: config.dbType as 'mysql',
-        host: config.dbHost,
-        port: config.dbPort,
-        username: config.dbUsername,
-        password: config.dbPassword,
-        database: config.dbDatabase,
-        entities: [__dirname + '/**/*.entity{.ts,.js}'],
-        synchronize: false,
-      }),
+      useFactory: async (config: ConfigService) => {
+        // workaround for matching the database type in the configuration options
+        let type;
+        switch (config.dbType) {
+          case 'mysql':
+            type = 'mysql';
+            break;
+          case 'sqlite':
+            type = 'sqlite';
+            break;
+          default:
+            type = 'mysql';
+        }
+
+        return {
+          type,
+          host: config.dbHost,
+          port: config.dbPort,
+          username: config.dbUsername,
+          password: config.dbPassword,
+          database: config.dbDatabase,
+          entities: [__dirname + '/**/*.entity{.ts,.js}'],
+          synchronize: false,
+        };
+      },
       inject: [ConfigService],
     }),
     RepositoryModule,
