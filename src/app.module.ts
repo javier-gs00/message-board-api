@@ -8,17 +8,21 @@ import { RepositoryModule } from './repository/repository.module';
 @Module({
   imports: [
     ConfigModule,
-    TypeOrmModule.forRoot({
-      type: 'mysql',
-      host: 'localhost',
-      port: 3306,
-      username: 'root',
-      password: 'root',
-      database: 'message_board',
-      entities: [__dirname + '/**/*.entity{.ts,.js}'],
-      synchronize: false,
+    TypeOrmModule.forRootAsync({
+      imports: [ConfigModule],
+      useFactory: async (config: ConfigService) => ({
+        type: config.dbType as 'mysql',
+        host: config.dbHost,
+        port: config.dbPort,
+        username: config.dbUsername,
+        password: config.dbPassword,
+        database: config.dbDatabase,
+        entities: [__dirname + '/**/*.entity{.ts,.js}'],
+        synchronize: false,
+      }),
+      inject: [ConfigService],
     }),
-    // RepositoryModule,
+    RepositoryModule,
     ControllerModule,
   ],
 })
