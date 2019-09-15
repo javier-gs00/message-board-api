@@ -4,6 +4,7 @@ import { ConfigModule } from './config/config.module';
 import { ConfigService } from './config/config.service';
 import { ControllerModule } from './controller/controller.module';
 import { RepositoryModule } from './repository/repository.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -38,6 +39,7 @@ import { RepositoryModule } from './repository/repository.module';
       inject: [ConfigService],
     }),
     RepositoryModule,
+    AuthModule,
     ControllerModule,
   ],
 })
